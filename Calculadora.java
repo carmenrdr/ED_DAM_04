@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 public class Calculadora {
 
     // Constantes
-    final int MAX_DIGITS = 5;
-    final int MODE_ENTRADA = 0;
-    final int MODE_RESULTADO = 1;
+    final int MAX_DIGITS = 5; //número máximo de dígitos que se pueden mostrar
+    final int MODE_ENTRADA = 0; //modo de entrada de números
+    final int MODE_RESULTADO = 1; //el modo en que se muestra el resultado final
 
     //Variables
     int modo;
@@ -31,11 +31,11 @@ public class Calculadora {
         //Inicialización de las variables.
         inicializa();
 
-        if (gui==true) dibujaCalculadora();
+        if (gui==true) dibujaCalculadora(); //dibuja la calculadora si se especifica "gui"
 
     }
 
-    private void dibujaCalculadora() {
+    private void dibujaCalculadora() { //método para dibujar la interfaz de la calculadora
 
         Display display = Display.getDefault();
         Shell shlCalculadora = new Shell();
@@ -229,28 +229,30 @@ public class Calculadora {
         }
     }
 
-    public void inicializa() {
+    public void inicializa() { //método para inicializar los valores de la calculadora
         operacion = "null";
         valor1 = 0;
         valor2 = 0;
-        modo = MODE_ENTRADA;
-        inicializa_resultado = true;
+        modo = MODE_ENTRADA; //establece el modo de entrada
+        inicializa_resultado = true; //indica que se debe inicializar el resultado
     }
 
-    public String getResultadoString (){
+    public String getResultadoString (){ //método para obtener el resultado como un string
+
         return texto_resultado.getText();
     }
 
-    public void setResultadoString(String s){
+    public void setResultadoString(String s){ //método para estbalecer el resultado como un string
+
         texto_resultado.setText(s);
     }
 
-    public int getResultadoInt() {
+    public int getResultadoInt() { //método para obtener el resultado como un entero
         String resultado = texto_resultado.getText();
         return Integer.parseInt(resultado);
     }
 
-    public void anadeNuevoDigito(int digito){
+    public void anadeNuevoDigito(int digito){ //método para añadir un nuevo dígito
         if (inicializa_resultado)
             setResultadoString("");
 
@@ -268,7 +270,7 @@ public class Calculadora {
         inicializa_resultado = false;
     }
 
-    public void ejecutarOperador(String new_operacion) {
+    public void ejecutarOperador(String new_operacion) { //Método para ejecutar la lógica de una operación matemática
 
         int resultado;
 
@@ -290,7 +292,7 @@ public class Calculadora {
         operacion = new_operacion;
     }
 
-    public void ejecutarIgual(){
+    public void ejecutarIgual(){ //método para ejecutar la operación "="
         int resultado = 0;
 
         valor2 = getResultadoInt();
@@ -300,10 +302,10 @@ public class Calculadora {
         operacion = "null";
     }
 
-    public int ejecutarOperacion() {
+    public int ejecutarOperacion() { //método para ejecutar la operación matemática concreta que se elige
         int resultado = 0;
 
-        if (operacion.equals("/"))
+        if (operacion.equals("/")) //para ejecutar la división
         {
 
             if (valor2 == 0)
@@ -318,26 +320,27 @@ public class Calculadora {
                 resultado = valor1 / valor2;
         }
 
-        if (operacion.equals("*"))
+        if (operacion.equals("*")) //para ejecutar la multiplicación
             resultado = valor1 * valor2;
 
-        if (operacion.equals("-"))
+        if (operacion.equals("-")) //para ejecutar la operación resta
             resultado = valor1 - valor2;
 
-        if (operacion.equals("+"))
+        if (operacion.equals("+")) //para ejecutar la operación suma
             resultado = valor1 + valor2;
 
         return resultado;
     }
 
-    public void muestraResultado(int resultado){
+    public void muestraResultado(int resultado){ //método para mostrar el resultado por pantalla
         setResultadoString(Integer.toString(resultado));
         valor1 = resultado;
         modo = MODE_RESULTADO;
         inicializa_resultado = true;
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) { //método main, método principal para ejecutar la calculadora
+
         Calculadora calculadora = new Calculadora(true);
     }
 
